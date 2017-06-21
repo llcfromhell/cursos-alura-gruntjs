@@ -62,3 +62,8 @@ dist/
 
 # tmp for grunt-concat
 .tmp/
+
+# .less & .coffee from grunt-less & grunt-coffee
+**.less.css
+
+**.coffee.js
