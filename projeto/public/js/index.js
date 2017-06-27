@@ -8,9 +8,11 @@
 	var button = $('button')[0];
 
 	button.classList.remove('invisivel');
+	
 
 	button.onclick = function() {
 		painel.classList.remove('invisivel');
 		this.classList.add('invisivel');
-	}
+	};
+
 })();

@@ -20,7 +20,7 @@ module.exports = function (grunt) {
                 dest: 'dist'
             },
 
-            less : {
+            less: {
                 expand: true,
                 cwd: 'public/less',
                 src: '**',
@@ -108,7 +108,7 @@ module.exports = function (grunt) {
         //
         watch: {
             coffee: {
-                options : {
+                options: {
                     event: ['added', 'changed']
                 },
                 files: 'public/coffee/**/*.coffee',
@@ -116,12 +116,27 @@ module.exports = function (grunt) {
             },
 
             less: {
-                options : {
+                options: {
                     event: ['added', 'changed']
                 },
                 files: 'public/less/**/*.less',
                 tasks: ['dist', 'compile', 'min', 'cleanDistMin']
+            },
+            js: {
+                options: {
+                    event: ['changed']
+                },
+                files: 'public/js/**/*.js',
+                tasks: 'jshint:js'
             }
+        },
+
+        jshint: {
+
+            js: {
+                src: ['public/js/**/*.js']
+            }
+
         }
     })
 
@@ -145,7 +160,9 @@ module.exports = function (grunt) {
     grunt.registerTask('local', ['compileLocal'])
     grunt.registerTask('cleanLocal', ['clean:publicCoffee', 'clean:publicLess'])
 
+    // copy files to a stage area to not modify the original source
     grunt.loadNpmTasks('grunt-contrib-copy')
+
     grunt.loadNpmTasks('grunt-contrib-clean')
     grunt.loadNpmTasks('grunt-contrib-concat')
     grunt.loadNpmTasks('grunt-contrib-uglify')
@@ -153,7 +170,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin')
     grunt.loadNpmTasks('grunt-contrib-coffee')
     grunt.loadNpmTasks('grunt-contrib-less')
+
+    // watch files
     grunt.loadNpmTasks('grunt-contrib-watch')
+
+    // verify JS syntax
+    grunt.loadNpmTasks('grunt-contrib-jshint')
+
     grunt.loadNpmTasks('grunt-usemin')
     grunt.loadNpmTasks('grunt-rev')
 
