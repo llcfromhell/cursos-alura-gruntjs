@@ -137,6 +137,18 @@ module.exports = function (grunt) {
                 src: ['public/js/**/*.js']
             }
 
+        },
+
+        browserSync : {
+            bsFiles: {
+                watchTask: true,
+                src : ['public/**/*']
+            },
+            options: {
+                server: {
+                    baseDir: "public"
+                }
+            }
         }
     })
 
@@ -148,6 +160,8 @@ module.exports = function (grunt) {
     grunt.registerTask('compileLocal', ['less:compilar', 'coffee:compilar'])
 
     grunt.registerTask('min', ['useminPrepare', 'concat', 'uglify', 'cssmin', 'rev:imagens', 'rev:minificados', 'usemin', 'imagemin'])
+
+    grunt.registerTask('server', ['browserSync', 'watch'])
 
     //
     // DEFAULT
@@ -170,6 +184,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin')
     grunt.loadNpmTasks('grunt-contrib-coffee')
     grunt.loadNpmTasks('grunt-contrib-less')
+    grunt.loadNpmTasks('grunt-usemin')
 
     // watch files
     grunt.loadNpmTasks('grunt-contrib-watch')
@@ -177,7 +192,10 @@ module.exports = function (grunt) {
     // verify JS syntax
     grunt.loadNpmTasks('grunt-contrib-jshint')
 
-    grunt.loadNpmTasks('grunt-usemin')
+    // files versioning
     grunt.loadNpmTasks('grunt-rev')
+
+    // browser sync
+    grunt.loadNpmTasks('grunt-browser-sync')
 
 }
